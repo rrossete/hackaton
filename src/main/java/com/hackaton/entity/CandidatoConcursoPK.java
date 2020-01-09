@@ -11,26 +11,26 @@ public class CandidatoConcursoPK implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "candidato_id")
-    private Integer candidatoId;
+    private Long candidatoId;
     @Column(name = "concurso_id")
-    private Integer concursoId;
+    private Long concursoId;
 
     public CandidatoConcursoPK() {
     }
 
-    public Integer getCandidatoId() {
+    public Long getCandidatoId() {
         return candidatoId;
     }
 
-    public void setCandidatoId(Integer candidatoId) {
+    public void setCandidatoId(Long candidatoId) {
         this.candidatoId = candidatoId;
     }
 
-    public Integer getConcursoId() {
+    public Long getConcursoId() {
         return concursoId;
     }
 
-    public void setConcursoId(Integer concursoId) {
+    public void setConcursoId(Long concursoId) {
         this.concursoId = concursoId;
     }
 }

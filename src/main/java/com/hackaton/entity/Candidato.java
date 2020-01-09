@@ -1,10 +1,12 @@
 package com.hackaton.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hackaton.dto.ConcursoDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 public class Candidato implements Serializable {
@@ -20,7 +22,16 @@ public class Candidato implements Serializable {
     private int cpf;
 
     @OneToMany(mappedBy = "candidato")
-    private Set<CandidatoConcurso> candidatoConcursos;
+    private List<CandidatoConcurso> candidatoConcursos;
+
+    public Candidato() {
+    }
+
+    public Candidato(CandidatoBuilder candidatoBuilder) {
+        this.nome = candidatoBuilder.nome;
+        this.cpf = candidatoBuilder.cpf;
+        this.candidatoConcursos = candidatoBuilder.candidatoConcursos;
+    }
 
     public Long getId() {
         return id;
@@ -46,11 +57,39 @@ public class Candidato implements Serializable {
         this.cpf = cpf;
     }
 
-    public Set<CandidatoConcurso> getCandidatoConcursos() {
+    public List<CandidatoConcurso> getCandidatoConcursos() {
         return candidatoConcursos;
     }
 
-    public void setCandidatoConcursos(Set<CandidatoConcurso> candidatoConcursos) {
+    public void setCandidatoConcursos(List<CandidatoConcurso> candidatoConcursos) {
         this.candidatoConcursos = candidatoConcursos;
+    }
+
+
+
+    public static class CandidatoBuilder{
+        private Long id;
+        private String nome;
+        private int cpf;
+        private List<CandidatoConcurso> candidatoConcursos;
+
+        public CandidatoBuilder() {
+        }
+
+        public CandidatoBuilder(Long id, String nome, int cpf, List<CandidatoConcurso> candidatoConcursos) {
+            this.id = id;
+            this.nome = nome;
+            this.cpf = cpf;
+            this.candidatoConcursos = candidatoConcursos;
+        }
+
+        public CandidatoBuilder(String nome, int cpf) {
+            this.nome = nome;
+            this.cpf = cpf;
+        }
+
+        public Candidato build(){
+            return new Candidato(this);
+        }
     }
 }

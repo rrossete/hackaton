@@ -1,7 +1,5 @@
 package com.hackaton.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity

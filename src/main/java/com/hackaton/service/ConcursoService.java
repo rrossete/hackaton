@@ -1,6 +1,5 @@
 package com.hackaton.service;
 
-import com.hackaton.entity.Candidato;
 import com.hackaton.entity.Concurso;
 import com.hackaton.enums.MensagemValidacao;
 import com.hackaton.repositories.ConcursoRepository;

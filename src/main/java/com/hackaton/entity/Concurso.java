@@ -2,7 +2,7 @@ package com.hackaton.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Concurso implements Serializable {
@@ -12,11 +12,14 @@ public class Concurso implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nomeConcurso;
+    private String nome;
     private double notaCorte;
 
     @OneToMany(mappedBy = "concurso")
-    private Set<CandidatoConcurso> candidatoConcursos;
+    private List<CandidatoConcurso> candidatoConcursos;
+
+    public Concurso() {
+    }
 
     public Long getId() {
         return id;
@@ -26,12 +29,12 @@ public class Concurso implements Serializable {
         this.id = id;
     }
 
-    public String getNomeConcurso() {
-        return nomeConcurso;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeConcurso(String nomeConcurso) {
-        this.nomeConcurso = nomeConcurso;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getNotaCorte() {
@@ -42,11 +45,11 @@ public class Concurso implements Serializable {
         this.notaCorte = notaCorte;
     }
 
-    public Set<CandidatoConcurso> getCandidatoConcursos() {
+    public List<CandidatoConcurso> getCandidatoConcursos() {
         return candidatoConcursos;
     }
 
-    public void setCandidatoConcursos(Set<CandidatoConcurso> candidatoConcursos) {
+    public void setCandidatoConcursos(List<CandidatoConcurso> candidatoConcursos) {
         this.candidatoConcursos = candidatoConcursos;
     }
 }

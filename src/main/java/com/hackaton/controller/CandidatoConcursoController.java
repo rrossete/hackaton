@@ -1,4 +1,4 @@
-package com.hackaton.endpoint;
+package com.hackaton.controller;
 
 import com.hackaton.service.CandidatoConcursoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/nota")
-public class CandidatoConcursoEndpoint {
+public class CandidatoConcursoController {
 
     @Autowired
     private CandidatoConcursoService candidatoConcursoService;
