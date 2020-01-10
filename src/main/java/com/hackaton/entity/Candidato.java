@@ -15,13 +15,16 @@ public class Candidato implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "nome")
     private String nome;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "cpf")
     private int cpf;
 
-    @OneToMany(mappedBy = "candidato")
+    @OneToMany(mappedBy = "candidato", fetch = FetchType.LAZY)
     private List<CandidatoConcurso> candidatoConcursos;
 
     public Candidato() {

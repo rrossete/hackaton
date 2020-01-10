@@ -20,9 +20,14 @@ public class CandidatoConcurso implements Serializable {
     @JoinColumn(name = "concurso_id")
     private Concurso concurso;
 
-    private long nota;
+    private double nota;
 
     public CandidatoConcurso() {
+    }
+
+    public CandidatoConcurso(CandidatoConcursoPK candidatoConcursoId, long nota) {
+        this.candidatoConcursoId = candidatoConcursoId;
+        this.nota = nota;
     }
 
     public CandidatoConcursoPK getCandidatoConcursoId() {
@@ -49,11 +54,13 @@ public class CandidatoConcurso implements Serializable {
         this.concurso = concurso;
     }
 
-    public long getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(long nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
+
+
 }

@@ -6,7 +6,15 @@ public class CandidatoDTO {
     private Long id;
     private String nome;
     private int cpf;
+    private double notaConcurso;
     private List<ConcursoDTO> concursos;
+
+    public CandidatoDTO(Long id, String nome, int cpf, double notaConcurso) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.notaConcurso = notaConcurso;
+    }
 
     public CandidatoDTO(Long id, String nome, int cpf) {
         this.id = id;
@@ -49,4 +57,11 @@ public class CandidatoDTO {
         this.concursos = concursos;
     }
 
+    public double getNotaConcurso() {
+        return notaConcurso;
+    }
+
+    public void setNotaConcurso(double notaConcurso) {
+        this.notaConcurso = notaConcurso;
+    }
 }

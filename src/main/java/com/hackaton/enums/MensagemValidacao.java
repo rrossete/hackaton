@@ -5,7 +5,10 @@ public enum MensagemValidacao {
     CONCURSO_NAO_ENCONTRADO("Concurso, com ID: {0}, não encontrado."),
     CANDIDATO_NAO_SALVO("Candidato {0} não foi salvo na base de dados."),
     CANDIDATO_NAO_EXCLUIDO("Candidato com ID: {0}, não existente."),
-    CANDIDATO_NAO_EDITADO("Não foi possível editar o candidato {0}");
+    CANDIDATO_NAO_EDITADO("Não foi possível editar o candidato {0}"),
+    ERRO_AO_BUSCAR_CANDIDATOS("Falha ao buscar candidatos"),
+    CONCURSO_JA_EXISTENTE("Concurso {0} já existe.");
+
 
     private String mensagem;
 

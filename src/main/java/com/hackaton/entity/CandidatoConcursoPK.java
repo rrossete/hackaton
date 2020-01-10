@@ -18,6 +18,11 @@ public class CandidatoConcursoPK implements Serializable {
     public CandidatoConcursoPK() {
     }
 
+    public CandidatoConcursoPK(Long candidatoId, Long concursoId) {
+        this.candidatoId = candidatoId;
+        this.concursoId = concursoId;
+    }
+
     public Long getCandidatoId() {
         return candidatoId;
     }

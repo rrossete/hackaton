@@ -4,6 +4,8 @@ import com.hackaton.dto.CandidatoDTO;
 import com.hackaton.enums.MensagemValidacao;
 import com.hackaton.service.CandidatoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,15 @@ public class CandidatoController {
     @Autowired
     private CandidatoService candidatoService;
 
+    @GetMapping
+    public ResponseEntity<?> buscarTodosCandidatos(Pageable pageable){
+
+        try {
+            return ResponseEntity.ok().body(this.candidatoService.buscarTodosCandidatos(pageable));
+        } catch (Exception e ){
+           return ResponseEntity.badRequest().body(MensagemValidacao.ERRO_AO_BUSCAR_CANDIDATOS.getMensagem());
+        }
+    }
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> buscarCandidato(@PathVariable("id") Long idCandidato){
        try{
@@ -66,4 +77,6 @@ public class CandidatoController {
                     candidatoDTO.getNome()));
         }
     }
+
+
 }
