@@ -14,7 +14,7 @@ import java.text.MessageFormat;
 import java.util.Objects;
 
 @Service
-public class CandidatoService {
+public class CandidatoService extends BaseService{
 
     @Autowired
     private CandidatoRepository candidatoRepository;
@@ -22,20 +22,23 @@ public class CandidatoService {
     @Autowired
     private ConcursoRepository concursoRepository;
 
-    public CandidatoDTO buscarCandidato(Long idCandidato){
-        CandidatoDTO candidato = this.candidatoRepository.buscarCandidato(idCandidato).orElseThrow(()-> new RuntimeException());
+    public CandidatoDTO buscarComConcurso(Long idCandidato){
+        CandidatoDTO candidato = this.candidatoRepository.buscarCandidato(idCandidato)
+                .orElseThrow(()-> new RuntimeException(
+                        MessageFormat.format(MensagemValidacao.CANDIDATO_NAO_ENCONTRADO.getMensagem(), idCandidato)));
+
         candidato.setConcursos(this.concursoRepository.buscarConcursoPorCandidato(idCandidato));
         return candidato;
     }
 
     public void inserirCandidato(CandidatoDTO candidatoDTO){
         this.validarCampos(candidatoDTO);
-        verificarSeCandidatoCadastrado(candidatoDTO.getCpf());
+        verificarCPFEmUso(candidatoDTO.getCpf());
         Candidato candidato = new Candidato.CandidatoBuilder(candidatoDTO.getNome(), candidatoDTO.getCpf()).build();
         this.candidatoRepository.save(candidato);
     }
 
-    private void verificarSeCandidatoCadastrado(Integer cpf) {
+    private void verificarCPFEmUso(Integer cpf) {
         if(this.candidatoRepository.findByCpf(cpf).isPresent()){
             throw new RuntimeException(MessageFormat.format(MensagemValidacao.CANDIDATO_JA_CADASTRADO.getMensagem(),
                     cpf));
@@ -50,11 +53,7 @@ public class CandidatoService {
 
     }
 
-    public void lancarExcecao(Boolean lancarExcecao, String mensagemValidacao){
-        if(lancarExcecao){
-            throw new RuntimeException(mensagemValidacao);
-        }
-    }
+
 
 
     public void excluirCandidato(Long idCandidato) {
@@ -63,7 +62,7 @@ public class CandidatoService {
 
     public void editarCandidato(CandidatoDTO candidatoDTO, Long idCandidato) {
         this.validarCampos(candidatoDTO);
-        this.verificarSeCandidatoCadastrado(candidatoDTO.getCpf());
+        this.verificarCPFEmUso(candidatoDTO.getCpf());
         Candidato candidato = atualizarCandidato(candidatoDTO, idCandidato);
         this.candidatoRepository.save(candidato);
     }
@@ -73,13 +72,14 @@ public class CandidatoService {
     }
 
     private Candidato atualizarCandidato(CandidatoDTO candidatoDTO, Long idCandidato) {
-        Candidato candidato = buscarCandidatoParaAtualizar(idCandidato);
+        Candidato candidato = buscar(idCandidato);
         candidato.setCpf(candidatoDTO.getCpf());
         candidato.setNome(candidatoDTO.getNome());
         return candidato;
     }
 
-    private Candidato buscarCandidatoParaAtualizar(Long idCandidato) {
-        return this.candidatoRepository.findById(idCandidato).orElseThrow(()-> new RuntimeException());
+    private Candidato buscar(Long idCandidato) {
+        return this.candidatoRepository.findById(idCandidato).orElseThrow(()-> new RuntimeException(
+                MessageFormat.format(MensagemValidacao.CANDIDATO_NAO_ENCONTRADO.getMensagem(), idCandidato)));
     }
 }

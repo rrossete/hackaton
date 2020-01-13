@@ -14,7 +14,7 @@ import java.text.MessageFormat;
 import java.util.Optional;
 
 @Service
-public class CandidatoConcursoService {
+public class CandidatoConcursoService extends BaseService{
 
     @Autowired
     private CandidatoConcursoRepository candidatoConcursoRepository;

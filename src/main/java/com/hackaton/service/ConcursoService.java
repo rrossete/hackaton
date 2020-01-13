@@ -11,10 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 
 @Service
-public class ConcursoService {
+public class ConcursoService extends BaseService{
 
     @Autowired
     private ConcursoRepository concursoRepository;
@@ -23,7 +24,7 @@ public class ConcursoService {
     private CandidatoRepository candidatoRepository;
 
     public ConcursoDTO buscar(Long idConcurso){
-        ConcursoDTO concursoDTO =  this.concursoRepository.buscar(idConcurso).orElseThrow(()-> new RuntimeException());
+        ConcursoDTO concursoDTO =  this.concursoRepository.buscar(idConcurso).orElseThrow(()-> new RuntimeException());//passar mensagem de erro
         concursoDTO.setCandidatos(this.candidatoRepository.buscarCandidatosPorConcurso(concursoDTO.getId()));
         return concursoDTO;
     }
@@ -37,14 +38,19 @@ public class ConcursoService {
         Concurso concurso = this.concursoRepository.findById(id).orElseThrow(()-> new RuntimeException(
                 MessageFormat.format(MensagemValidacao.CONCURSO_NAO_ENCONTRADO.getMensagem(), id)
         ));
-        concurso.setNome(concursoDTO.getNome());
-        concurso.setNotaCorte(concursoDTO.getNotaCorte());
+        if(Objects.nonNull(concurso.getNome())){
+            concurso.setNome(concursoDTO.getNome());
+        }
+        if(Objects.nonNull(concursoDTO.getNotaCorte())){
+            concurso.setNotaCorte(concursoDTO.getNotaCorte());
+        }
         return concurso;
     }
 
 
     public void inserir(ConcursoDTO concursoDTO) {
         this.validarConcursoExistente(concursoDTO.getNome());
+
         Concurso concurso = new Concurso.ConcursoBuilder(concursoDTO.getNome(), concursoDTO.getNotaCorte()).build();
 
         this.concursoRepository.save(concurso);

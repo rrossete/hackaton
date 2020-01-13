@@ -7,21 +7,21 @@ public class ConcursoDTO {
 
     private Long id;
     private String nome;
-    private double notaCorte;
+    private Double notaCorte;
     private double notaCandidato;
     private List<CandidatoDTO> candidatos;
 
     public ConcursoDTO() {
     }
 
-    public ConcursoDTO(Long id, String nome, double notaCorte, double notaCandidato) {
+    public ConcursoDTO(Long id, String nome, double notaCorte, Double notaCandidato) {
         this.id = id;
         this.nome = nome;
         this.notaCorte = notaCorte;
         this.notaCandidato = notaCandidato;
     }
 
-    public ConcursoDTO(Long id, String nome, double notaCorte) {
+    public ConcursoDTO(Long id, String nome, Double notaCorte) {
         this.id = id;
         this.nome = nome;
         this.notaCorte = notaCorte;
@@ -43,11 +43,11 @@ public class ConcursoDTO {
         this.nome = nome;
     }
 
-    public double getNotaCorte() {
+    public Double getNotaCorte() {
         return notaCorte;
     }
 
-    public void setNotaCorte(double notaCorte) {
+    public void setNotaCorte(Double notaCorte) {
         this.notaCorte = notaCorte;
     }
 

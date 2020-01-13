@@ -30,7 +30,7 @@ public class CandidatoController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> buscarCandidato(@PathVariable("id") Long idCandidato){
        try{
-           return ResponseEntity.ok().body(this.candidatoService.buscarCandidato(idCandidato));
+           return ResponseEntity.ok().body(this.candidatoService.buscarComConcurso(idCandidato));
        }catch (Exception e){
            return ResponseEntity.badRequest().body(
                    MessageFormat.format(MensagemValidacao.CANDIDATO_NAO_ENCONTRADO.getMensagem(),
