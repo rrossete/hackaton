@@ -4,15 +4,12 @@ import com.hackaton.dto.CandidatoDTO;
 import com.hackaton.enums.MensagemValidacao;
 import com.hackaton.service.CandidatoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.text.MessageFormat;
-import java.util.Objects;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping(value = "/candidatos")
@@ -48,9 +45,7 @@ public class CandidatoController {
            this.candidatoService.inserirCandidato(candidatoDTO);
            return ResponseEntity.ok().build();
        }catch (Exception e){
-           return ResponseEntity.badRequest().body(
-                   MessageFormat.format(MensagemValidacao.CANDIDATO_NAO_SALVO.getMensagem(),
-                   candidatoDTO.getNome()));
+           return ResponseEntity.badRequest().body(e.getMessage());
        }
     }
 
@@ -72,9 +67,7 @@ public class CandidatoController {
             this.candidatoService.editarCandidato(candidatoDTO,idCandidato );
             return ResponseEntity.ok().build();
         }catch (Exception e){
-            return ResponseEntity.badRequest().body(MessageFormat.format(
-                    MensagemValidacao.CANDIDATO_NAO_EDITADO.getMensagem(),
-                    candidatoDTO.getNome()));
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

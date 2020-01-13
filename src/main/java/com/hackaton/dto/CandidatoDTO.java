@@ -5,18 +5,18 @@ public class CandidatoDTO {
 
     private Long id;
     private String nome;
-    private int cpf;
+    private Integer cpf;
     private double notaConcurso;
     private List<ConcursoDTO> concursos;
 
-    public CandidatoDTO(Long id, String nome, int cpf, double notaConcurso) {
+    public CandidatoDTO(Long id, String nome, Integer cpf, double notaConcurso) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.notaConcurso = notaConcurso;
     }
 
-    public CandidatoDTO(Long id, String nome, int cpf) {
+    public CandidatoDTO(Long id, String nome, Integer cpf) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -41,11 +41,11 @@ public class CandidatoDTO {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public Integer getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(Integer cpf) {
         this.cpf = cpf;
     }
 

@@ -31,4 +31,6 @@ public interface CandidatoRepository extends PagingAndSortingRepository<Candidat
             "join cc.candidato candidato where cc.candidatoConcursoId.concursoId = :id")
     List<CandidatoDTO> buscarCandidatosPorConcurso(@Param(value = "id") Long concursoId);
 
+    Optional<Candidato> findByCpf(Integer cpf);
+
 }

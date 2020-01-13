@@ -2,6 +2,8 @@ package com.hackaton.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
+
 @Entity
 public class CandidatoConcurso implements Serializable {
 
@@ -28,6 +30,13 @@ public class CandidatoConcurso implements Serializable {
     public CandidatoConcurso(CandidatoConcursoPK candidatoConcursoId, long nota) {
         this.candidatoConcursoId = candidatoConcursoId;
         this.nota = nota;
+    }
+
+    public CandidatoConcurso(CandidatoConcursoBuilder candidatoConcursoBuilder) {
+        this.candidatoConcursoId = new CandidatoConcursoPK(candidatoConcursoBuilder.candidatoId,
+                                                            candidatoConcursoBuilder.concursoId);
+
+        this.nota = candidatoConcursoBuilder.nota;
     }
 
     public CandidatoConcursoPK getCandidatoConcursoId() {
@@ -62,5 +71,22 @@ public class CandidatoConcurso implements Serializable {
         this.nota = nota;
     }
 
+    public static class CandidatoConcursoBuilder{
+
+        private Long candidatoId;
+        private Long concursoId;
+        private Double nota;
+
+        public CandidatoConcursoBuilder(Long candidatoId, Long concursoId, Double nota){
+            this.candidatoId = candidatoId;
+            this.concursoId = concursoId;
+            this.nota = nota;
+        }
+
+        public CandidatoConcurso build (){
+            return new CandidatoConcurso(this);
+        }
+
+    }
 
 }
